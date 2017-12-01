@@ -35,7 +35,18 @@ public class HomeActivity extends AppCompatActivity {
     private GpioCallback mCallback = new GpioCallback() {
         @Override
         public boolean onGpioEdge(Gpio gpio) {
-            Log.i(TAG, "GPIO changed");
+            String gName = gpio.toString();
+            try {
+                if (gpio.getValue()) {
+                    Log.i(TAG, "GPIO " + gName + " changed to TRUE");
+                }
+                else {
+                    Log.i(TAG, "GPIO " + gName + " changed to FALSE");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return true;
         }
     };
